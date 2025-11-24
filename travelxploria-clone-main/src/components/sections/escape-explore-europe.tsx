@@ -1,52 +1,56 @@
-
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
 
+const InternalStyles = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Dancing+Script:wght@400;700&family=Oswald:wght@400;700&family=Cinzel:wght@400;700;900&display=swap');
+    
+    .font-playfair { font-family: 'Playfair Display', serif; }
+    .font-dancing { font-family: 'Dancing Script', cursive; }
+    .font-oswald { font-family: 'Oswald', sans-serif; }
+    .font-cinzel { font-family: 'Cinzel', serif; }
+  `}</style>
+);
+
 const destinations = [
   {
-    name: 'Spain',
-    sub: 'A Fiesta for the Senses',
-    img: '', // Image removed
+   
+    img: '/spain.webp', 
     fontClass: 'font-playfair font-black text-lg md:text-xl italic', 
     subFontClass: 'font-sans font-medium text-[7px] tracking-[0.15em] uppercase',
     overlayColor: 'from-black/80 via-black/20 to-transparent'
   },
   {
-    name: 'FRANCE',
-    sub: 'The Art of Living',
-    img: '', // Image removed
+    
+    img: '/france.webp', 
     fontClass: 'font-oswald font-bold tracking-[0.2em] uppercase text-base md:text-lg', 
     subFontClass: 'font-sans font-light tracking-widest text-[8px] uppercase',
     overlayColor: 'from-black/80 via-black/20 to-transparent'
   },
   {
-    name: 'Italy',
-    sub: 'Discover the Myth',
-    img: '', // Image removed
+    
+    img: '/italy.webp', 
     fontClass: 'font-cinzel font-black tracking-wide text-base md:text-lg', 
     subFontClass: 'font-dancing text-xs text-[#cca352]',
     overlayColor: 'from-black/80 via-black/20 to-transparent'
   },
   {
-    name: 'GERMANY',
-    sub: 'Historic & Modern',
-    img: '', // Image removed
+    
+    img: '/uk.webp', 
     fontClass: 'font-oswald font-bold tracking-tighter uppercase text-base md:text-lg', 
     subFontClass: 'font-serif italic text-[9px] tracking-wide',
     overlayColor: 'from-black/80 via-black/20 to-transparent'
   },
   {
-    name: 'GREECE',
-    sub: 'Mediterranean Soul',
-    img: '', // Image removed
+  
+    img: '/greece.webp', 
     fontClass: 'font-cinzel font-bold text-sm md:text-base', 
     subFontClass: 'font-dancing text-xs',
     overlayColor: 'from-black/80 via-black/20 to-transparent'
   },
   {
-    name: 'Switzerland',
-    sub: 'The Heart of the Alps',
-    img: '', // Image removed
+   
+    img: '/switzerland.webp', 
     fontClass: 'font-playfair font-bold text-lg md:text-xl tracking-tight', 
     subFontClass: 'font-dancing text-xs md:text-sm text-[#f0e6d2]', 
     overlayColor: 'from-black/80 via-black/20 to-transparent'
@@ -55,6 +59,8 @@ const destinations = [
 
 const EscapeExploreEurope = () => {
   return (
+    <>
+    <InternalStyles />
     <section className="py-12 md:py-16 bg-[#FFFBF2] overflow-hidden">
       {/* 
          Updated Padding:
@@ -99,7 +105,14 @@ const EscapeExploreEurope = () => {
                         // Use bg-gray-800 to serve as a placeholder background for the removed images
                         className="relative rounded-lg overflow-hidden group cursor-pointer shadow-md hover:shadow-xl transition-all duration-500 bg-gray-800 aspect-square"
                     >
-                        {/* Image removed as requested */}
+                        {/* Image Component Restored */}
+                        {dest.img && (
+                          <img 
+                            src={dest.img} 
+                            alt={dest.name} 
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                          />
+                        )}
                         
                         {/* Gradient Overlay */}
                         <div className={`absolute inset-0 bg-gradient-to-t ${dest.overlayColor} opacity-90 transition-opacity duration-300`}></div>
@@ -132,6 +145,7 @@ const EscapeExploreEurope = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

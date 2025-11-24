@@ -15,7 +15,7 @@ const budgetPackagesData: BudgetPackage[] = [
     duration: "7D / 6N",
     cities: "New Delhi • Agra +1",
     price: 17500,
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_2.png" // Taj Mahal
+    image: "/tajmahal1.webp" // Taj Mahal
   },
   {
     title: "Grand European Discovery",

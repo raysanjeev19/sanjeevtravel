@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const destinations = [
   { 
     name: "Europe", 
-    image: "https://travelxploria.com/wp-content/uploads/2024/04/eiffel-tower-in-paris-2021-08-26-15-27-01-utc-scaled.jpg", 
+    image: "/larki.webp", 
     alt: "Europe" 
   },
   { 
@@ -14,7 +14,7 @@ const destinations = [
   },
   { 
     name: "Vietnam", 
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_1.png", 
+    image: "/vietnam1.webp", 
     alt: "Vietnam" 
   },
   { 
@@ -39,7 +39,7 @@ const destinations = [
   },
   { 
     name: "Kenya", 
-    image: "https://travelxploria.com/wp-content/uploads/2024/04/adorable-lion-in-the-savannah-in-a-field-2023-11-27-05-18-09-utc.jpg", 
+    image: "/malaysia.webp", 
     alt: "Kenya" 
   },
   { 

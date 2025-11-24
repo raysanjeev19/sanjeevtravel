@@ -184,7 +184,7 @@ export default function Header() {
                  
                   <div className="hidden xl:block">
                       <span className="text-[#f0bf4c] text-xl font-bold tracking-tight">Travel</span>
-                      <span className="text-white text-xl font-light tracking-widest">xploria</span>
+                      <span className="text-white text-xl font-light tracking-widest">sanjeev</span>
                   </div>
                 </div>
               </a>
@@ -230,7 +230,7 @@ export default function Header() {
               <div className="flex items-center shrink-0 gap-4">
                  <a href="tel:+919831393561" className="hidden md:flex items-center gap-2 bg-[#d4f58d] text-[#1a3305] hover:bg-[#c2e873] transition-colors px-5 py-2 rounded-full font-bold text-[13px] shadow-lg transform active:scale-95">
                     <Phone size={14} className="fill-current" />
-                    <span>+91 98313 93561</span>
+                    <span>+91 98313 93500</span>
                  </a>
                  <button className="lg:hidden text-white p-2">
                    <Search size={24} />

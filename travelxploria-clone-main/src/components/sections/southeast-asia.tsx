@@ -7,40 +7,30 @@ import { Destination } from "../types";
 const destinations: Destination[] = [
   {
     id: "1",
-    name: "Bali",
-    subTitle: "Where Paradise Meets Culture",
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1000&auto=format&fit=crop",
+   
+    image: "/bali.webp",
   },
   {
     id: "2",
-    name: "Thailand",
-    subTitle: "Thrill in",
-    image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=1000&auto=format&fit=crop",
+    
+    image: "/thailand.webp",
   },
   {
     id: "3",
-    name: "Singapore",
-    subTitle: "Urban Oasis",
-    image: "https://images.unsplash.com/photo-1565967511849-76a60a516170?q=80&w=1000&auto=format&fit=crop",
+    
+    image: "/singapore.webp",
   },
   {
     id: "4",
-    name: "Vietnam",
-    subTitle: "Timeless Charm",
-    image: "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1000&auto=format&fit=crop",
+   
+    image: "/vietnam.webp",
   },
   {
     id: "5",
-    name: "Malaysia",
-    subTitle: "Asia's True Essence",
-    image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?q=80&w=1000&auto=format&fit=crop",
+   
+    image: "/malaysia.webp",
   },
-  {
-    id: "6",
-    name: "Indonesia",
-    subTitle: "Emerald of the Equator",
-    image: "https://images.unsplash.com/photo-1555899434-94d1368b7af6?q=80&w=1000&auto=format&fit=crop",
-  },
+  
 ];
 
 const SoutheastAsiaSection: React.FC = () => {

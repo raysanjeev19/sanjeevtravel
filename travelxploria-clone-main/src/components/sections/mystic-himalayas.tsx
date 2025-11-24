@@ -11,32 +11,26 @@ interface Destination {
 const HIMALAYAN_DESTINATIONS: Destination[] = [
   { 
     id: '1',
-    name: 'Nepal', 
-    tagline: 'Home of the Himalayas',
+  
     imageSrc: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_24.png' 
   },
   { 
     id: '2',
-    name: 'Bhutan', 
-    tagline: 'Sacred Peaks & Silent Prayers', 
     imageSrc: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_25.png' 
   },
   { 
     id: '3',
-    name: 'Darjeeling & Sikkim', 
-    tagline: 'Eastern Crown', 
+  
     imageSrc: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_26.png' 
   },
   { 
     id: '4',
-    name: 'Arunachal', 
-    tagline: 'The Dawn-Lit Mountains', 
+  
     imageSrc: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_27.png' 
   },
   { 
     id: '5',
-    name: 'Meghalaya', 
-    tagline: 'Abode of Clouds', 
+   
     imageSrc: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_28.png' 
   }
 ];

@@ -59,9 +59,7 @@ export default function HomePage() {
           <PostcardsSection />
           <BudgetCta />
           <ContactForm />
-          <SeasonalOffers />
-          <GuestReviews />
-          <NewsInsight />
+         
         </div>
       </main>
       

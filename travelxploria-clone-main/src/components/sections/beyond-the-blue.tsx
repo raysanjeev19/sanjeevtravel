@@ -1,34 +1,49 @@
-"use client";
-
-import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Data for the destination cards based on instructions and assets
-const destinations = [
+// Interfaces
+interface Destination {
+  name: string;
+  subtitle: string;
+  image: string;
+}
+
+// Data matching the image provided
+const destinations: Destination[] = [
   {
     name: 'Maldives',
-    subtitle: 'Palm-Fringed Private Oasis',
-    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_6.png'
+    subtitle: 'Heaven Meets the Ocean',
+    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=1000&auto=format&fit=crop'
   },
   {
     name: 'GOA',
-    subtitle: 'Feel the Vibe of the Ocean',
-    image: null // No image asset provided in the input, using a placeholder
+    subtitle: 'Feel Alive in',
+    image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=1000&auto=format&fit=crop'
   },
   {
-    name: 'Andaman',
-    subtitle: 'Explore the International Ocean of the Sea',
-    image: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_12.png'
+    
+    image: '/srilanka.webp'
+  },
+  {
+   
+    image: '/singapore.webp'
+  },
+  {
+    name: 'Lakshadweep',
+    subtitle: 'A High Tide of Serenity',
+    image: 'https://images.unsplash.com/photo-1590444391696-6e54541315ce?q=80&w=1000&auto=format&fit=crop'
   }
 ];
 
-const BeyondTheBlue = () => {
+const BeyondTheBlue: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
-  const [isScrolledToStart, setIsScrolledToStart] = useState(true);
+  
+  // State to track scroll availability for button enabling/disabling
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
+  // Debounce helper
   const debounce = (func: Function, delay: number) => {
     let timeout: NodeJS.Timeout;
     return (...args: any) => {
@@ -37,17 +52,25 @@ const BeyondTheBlue = () => {
     };
   };
 
-  const updateNavState = useCallback(() => {
+  // Check scroll position and update index/buttons
+  const updateScrollState = useCallback(() => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setIsScrolledToStart(scrollLeft < 10);
-      setIsScrolledToEnd(scrollLeft + clientWidth >= scrollWidth - 10);
+      
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
 
-      const cardWidth = (scrollContainerRef.current.children[0] as HTMLElement)?.offsetWidth || 0;
-      const gap = 24; // from gap-6
-      const effectiveCardWidth = cardWidth + gap;
-      if (effectiveCardWidth > 0) {
-        setCurrentIndex(Math.round(scrollLeft / effectiveCardWidth));
+      // Calculate approximate index
+      const card = scrollContainerRef.current.children[0] as HTMLElement;
+      if (card) {
+        const cardWidth = card.offsetWidth;
+        const gap = 24; // gap-6 is 24px
+        const effectiveWidth = cardWidth + gap;
+        const newIndex = Math.round(scrollLeft / effectiveWidth);
+        
+        // Clamp index to bounds
+        const safeIndex = Math.min(Math.max(newIndex, 0), destinations.length - 1);
+        setCurrentIndex(safeIndex);
       }
     }
   }, []);
@@ -55,109 +78,147 @@ const BeyondTheBlue = () => {
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (container) {
-      const debouncedUpdateNavState = debounce(updateNavState, 100);
-      container.addEventListener('scroll', debouncedUpdateNavState);
-      updateNavState(); // Initial check on mount
-      return () => container.removeEventListener('scroll', debouncedUpdateNavState);
+      const debouncedUpdate = debounce(updateScrollState, 100);
+      container.addEventListener('scroll', debouncedUpdate);
+      // Initial check
+      updateScrollState();
+      
+      return () => container.removeEventListener('scroll', debouncedUpdate);
     }
-  }, [updateNavState]);
+  }, [updateScrollState]);
 
-  const scrollToSlide = (index: number) => {
+  const scrollToIndex = (index: number) => {
     if (scrollContainerRef.current) {
       const card = scrollContainerRef.current.children[index] as HTMLElement;
       if (card) {
-        card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        const gap = 24;
+        const offset = index * (card.offsetWidth + gap);
+        
+        scrollContainerRef.current.scrollTo({
+          left: offset,
+          behavior: 'smooth'
+        });
       }
     }
   };
 
   const handlePrev = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth = (scrollContainerRef.current.children[0] as HTMLElement)?.offsetWidth || 0;
-      const gap = 24; 
-      scrollContainerRef.current.scrollBy({ left: -(cardWidth + gap), behavior: 'smooth' });
-    }
+    const newIndex = Math.max(0, currentIndex - 1);
+    scrollToIndex(newIndex);
   };
 
   const handleNext = () => {
-     if (scrollContainerRef.current) {
-      const cardWidth = (scrollContainerRef.current.children[0] as HTMLElement)?.offsetWidth || 0;
-      const gap = 24; 
-      scrollContainerRef.current.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
-    }
+    const newIndex = Math.min(destinations.length - 1, currentIndex + 1);
+    scrollToIndex(newIndex);
   };
 
   return (
-    <section className="bg-white py-16 md:py-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-semibold font-display text-text-black">Beyond the Blue</h2>
-          <p className="mt-2 text-text-medium-gray font-body text-base">Where Every Wave Tells a Story</p>
+    <section className="bg-white py-12 w-full">
+      {/* Increased padding on the container: px-8 on mobile, md:px-24 on desktop */}
+      <div className="container mx-auto px-8 md:px-24 lg:px-32 flex flex-col items-center">
+        
+        {/* Header Section */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-normal font-sans text-gray-900 tracking-tight">
+            Beyond the Blue
+          </h2>
+          <p className="mt-2 text-gray-500 font-sans text-base font-light tracking-wide">
+            Where Every Wave Tells a Story
+          </p>
         </div>
 
-        <div className="relative flex justify-center">
-            <div className="relative w-full max-w-5xl">
-              <button
-                onClick={handlePrev}
-                disabled={isScrolledToStart}
-                className="absolute top-1/2 -mt-5 -left-4 md:-left-5 w-10 h-10 bg-accent-navy text-white rounded-full flex items-center justify-center z-10 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-opacity-80"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
+        {/* Carousel Section */}
+        <div className="w-full max-w-[1400px]">
+          <div 
+            ref={scrollContainerRef}
+            // Hiding scrollbar explicitly using Tailwind arbitrary variants and inline styles for cross-browser support
+            className="flex gap-6 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] snap-x snap-mandatory px-2 md:px-4 pb-4 pt-2"
+            style={{ 
+              scrollBehavior: 'smooth',
+              scrollbarWidth: 'none', // Firefox
+              msOverflowStyle: 'none' // IE/Edge
+            }}
+          >
+            {destinations.map((dest, index) => (
               <div 
-                ref={scrollContainerRef} 
-                className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-2 py-4"
+                key={index} 
+                onClick={() => scrollToIndex(index)}
+                // Small Card Sizes
+                className="snap-start flex-shrink-0 relative w-[220px] h-[180px] md:w-[260px] md:h-[220px] lg:w-[300px] lg:h-[240px] rounded-2xl overflow-hidden cursor-pointer group shadow-sm hover:shadow-xl transition-all duration-500 ease-out"
               >
-                {destinations.map((dest, index) => (
-                  <div key={index} className="snap-start flex-shrink-0 w-[calc(90vw-24px)] sm:w-[320px] lg:w-[350px]">
-                    <div className="relative w-full h-[250px] md:h-[280px] rounded-xl overflow-hidden group shadow-md transition-shadow duration-300 hover:shadow-xl">
-                      {dest.image ? (
-                        <Image
-                          src={dest.image}
-                          alt={dest.name}
-                          fill
-                          sizes="(max-width: 640px) 90vw, 350px"
-                          style={{ objectFit: 'cover' }}
-                          className="transition-transform duration-300 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                          <span className="text-gray-500 font-body">Image for {dest.name}</span>
-                        </div>
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-5 left-5 text-white">
-                        <p className="text-sm font-light font-body">{dest.subtitle}</p>
-                        <h3 className="text-2xl font-bold font-display mt-1">{dest.name}</h3>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                {/* Image */}
+                <img 
+                  src={dest.image} 
+                  alt={dest.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70 opacity-90"></div>
+                
+                {/* Text Content */}
+                <div className="absolute bottom-0 left-0 w-full p-5 text-center text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                  <p className="text-[10px] md:text-xs font-sans font-light tracking-widest uppercase mb-1 opacity-90">
+                    {dest.subtitle}
+                  </p>
+                  <h3 className="text-2xl md:text-3xl font-serif font-bold tracking-wide drop-shadow-lg">
+                    {dest.name}
+                  </h3>
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation Controls (Bottom Centered) */}
+        <div className="flex items-center gap-6 mt-6">
+          
+          {/* Previous Button */}
+          <button
+            onClick={handlePrev}
+            disabled={!canScrollLeft}
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+              !canScrollLeft 
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                : 'bg-accent-navy text-white hover:bg-slate-700 shadow-lg'
+            }`}
+            aria-label="Previous slide"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          {/* Pagination Indicators */}
+          <div className="flex items-center gap-2">
+            {destinations.map((_, index) => (
               <button
-                onClick={handleNext}
-                disabled={isScrolledToEnd}
-                className="absolute top-1/2 -mt-5 -right-4 md:-right-5 w-10 h-10 bg-accent-navy text-white rounded-full flex items-center justify-center z-10 transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-opacity-80"
-                aria-label="Next slide"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            </div>
+                key={index}
+                onClick={() => scrollToIndex(index)}
+                className={`rounded-full transition-all duration-500 ease-in-out ${
+                  index === currentIndex 
+                    ? 'w-6 h-1.5 bg-accent-coral' // Active state: dash
+                    : 'w-1.5 h-1.5 bg-gray-300 hover:bg-gray-400' // Inactive state: dot
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Next Button */}
+          <button
+            onClick={handleNext}
+            disabled={!canScrollRight}
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+              !canScrollRight 
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+                : 'bg-accent-navy text-white hover:bg-slate-700 shadow-lg'
+            }`}
+            aria-label="Next slide"
+          >
+            <ChevronRight size={20} />
+          </button>
+
         </div>
-        
-        <div className="flex justify-center gap-2 mt-8">
-          {destinations.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollToSlide(index)}
-              className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-accent-coral' : 'bg-gray-300'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            ></button>
-          ))}
-        </div>
+
       </div>
     </section>
   );

@@ -14,20 +14,20 @@ const destinations: Destination[] = [
     name: "Abu Dhabi Skyline",
     className: "col-span-2 md:col-start-1 md:col-span-2 md:row-start-1 aspect-[2/1]",
     // Blue hour skyline
-    imgSrc: "/dubai image .webp",
+    imgSrc: "/dubai image2.webp",
   },
   // Bottom: 2 Portraits
   {
     name: "Burj Khalifa",
     className: "col-span-1 md:col-start-1 md:row-start-2 aspect-square",
     // Looking up at Khalifa with sun
-    imgSrc: "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=600&auto=format&fit=crop",
+    imgSrc: "/dubai image5.webp",
   },
   {
     name: "Desert Safari",
     className: "col-span-1 md:col-start-2 md:row-start-2 aspect-square",
     // Camels in desert
-    imgSrc: "https://images.unsplash.com/photo-1598605272254-16f0c0ecdfa5?q=80&w=600&auto=format&fit=crop",
+    imgSrc: "/dubai image3.webp",
   },
 
   // CENTER COLUMN
@@ -35,7 +35,7 @@ const destinations: Destination[] = [
     name: "Sheikh Zayed Grand Mosque",
     className: "col-span-2 md:col-start-3 md:col-span-2 md:row-start-1 md:row-span-2 aspect-square",
     // Mosque at dusk/night reflection
-    imgSrc: "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1200&auto=format&fit=crop",
+    imgSrc: "/dubai image .webp",
     isLarge: true,
   },
 
@@ -45,20 +45,20 @@ const destinations: Destination[] = [
     name: "Burj Al Arab",
     className: "col-span-1 md:col-start-5 md:row-start-1 aspect-square",
     // Burj Al Arab from beach
-    imgSrc: "https://images.unsplash.com/photo-1528702748617-c64d49f918af?q=80&w=600&auto=format&fit=crop",
+    imgSrc: "/dubai image2.webp",
   },
   {
     name: "Skydiving in Dubai",
     className: "col-span-1 md:col-start-6 md:row-start-1 aspect-square",
     // Skydiving over Palm
-    imgSrc: "https://images.unsplash.com/photo-1529511582522-8785ebf7f909?q=80&w=600&auto=format&fit=crop",
+    imgSrc: "/dubai image6.webp",
   },
   // Bottom: Landscape
   {
     name: "Museum of the Future",
     className: "col-span-2 md:col-start-5 md:col-span-2 md:row-start-2 aspect-[2/1]",
     // Museum with light trails
-    imgSrc: "https://images.unsplash.com/photo-1662998394982-1d54f85e3a35?q=80&w=800&auto=format&fit=crop",
+    imgSrc: "/dubai image1.webp",
   },
 ];
 
@@ -78,13 +78,7 @@ const GridItem = ({ name, className, imgSrc, isLarge = false }: Destination) => 
     {isLarge ? (
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
         <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-          <p className="text-base md:text-xl text-white font-serif italic mb-1 tracking-wider drop-shadow-md">Experience In</p>
-          <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white font-sans drop-shadow-lg leading-none">
-            Dubai <span className="text-[#ff6b6b]">&</span>
-          </h3>
-          <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white font-sans drop-shadow-lg leading-tight">
-             Abu Dhabi
-          </h3>
+         
         </div>
       </div>
     ) : (

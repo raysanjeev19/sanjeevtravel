@@ -12,28 +12,28 @@ interface Package {
 
 const packages: Package[] = [
   {
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_4.png",
+    image:"/larki.webp", 
     duration: "5D/4N",
     title: "Mesmerizing Phuket Holiday",
     location: "5D Phuket",
     price: "26300"
   },
   {
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_2.png",
+    image: "/tajmahal1.webp", 
     duration: "6D/5N",
     title: "Beautiful Taj Mahal Tour",
     location: "2D New Delhi • 1D Agra ...+1",
     price: "16900"
   },
   {
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_1.png",
+    image:"/bali1.webp", 
     duration: "5D/4N",
     title: "Bali Adventure & Beach Escape",
     location: "5D Kuta",
     price: "25500"
   },
   {
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/3ffab2e4-062a-4652-a86b-9337d72a2416-travelxploria-com/assets/images/images_3.png",
+    image: "/vietnam1.webp", 
     duration: "7D/6N",
     title: "Ultimate Vietnam Experience",
     location: "3D Ho Chi Minh • 4D Phu Qu... +1",

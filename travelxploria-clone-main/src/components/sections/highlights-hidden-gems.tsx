@@ -32,10 +32,9 @@ const GEMS_DESTINATIONS: Destination[] = [
   },
   {
     id: '4',
-    name: 'EGYPT',
-    tagline: 'Beyond the Pyramids, Into Eternity',
+   
     // Pyramids of Giza
-    imageSrc: 'https://images.unsplash.com/photo-1539650116455-a2762580f008?q=80&w=600&auto=format&fit=crop',
+    imageSrc: '/uk.webp',
   },
   {
     id: '5',
